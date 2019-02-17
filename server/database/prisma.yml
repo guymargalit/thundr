@@ -1,0 +1,7 @@
+endpoint: ${env:ENDPOINT}
+datamodel: datamodel.graphql
+
+# Deploy hook
+hooks:
+    post-deploy:
+        - graphql get-schema --project database

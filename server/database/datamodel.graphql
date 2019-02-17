@@ -1,0 +1,8 @@
+type User {
+	id: ID! @unique
+	name: String!
+	spotifyId: String! @unique
+	accessToken: String
+	refreshToken: String
+	timeExpires: String
+}

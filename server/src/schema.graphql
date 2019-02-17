@@ -1,0 +1,80 @@
+# import User from "./generated/prisma.graphql"
+
+type Query {
+	getAudioAnalysis(id: String): AudioAnalysis!
+	getCurrentTrack: CurrentPlaying!
+	seek(position_ms: Int): String!
+	play: String!
+}
+
+type AudioAnalysis {
+	bars: [TimeInterval]
+	beats: [TimeInterval]
+	sections: [Section]
+	segments: [Segment]
+	tatums: [TimeInterval]
+}
+
+type TimeInterval {
+	start: Float
+	duration: Float
+	confidence: Float
+}
+
+type Section {
+	start: Float
+	duration: Float
+	confidence: Float
+	loudness: Float
+	tempo: Float
+	tempo_confidence: Float
+	key: Int
+	key_confidence: Float
+	mode: Int
+	mode_confidence: Float
+	time_signature: Int
+	time_signature_confidence: Float
+}
+
+type Segment {
+	start: Float
+	duration: Float
+	confidence: Float
+	loudness_start: Float
+	loudness_max: Float
+	loudness_max_time: Float
+	loudness_end: Float
+	pitches: [Float]
+	timbre: [Float]
+}
+
+type CurrentPlaying {
+	is_playing: Boolean
+	item: Track
+	progress_ms: Int
+	timestamp: Int
+}
+
+type Track {
+	id: String
+	album: Album
+	artists: [Artist]
+	duration_ms: Int
+	name: String
+}
+
+type Album {
+	name: String
+	images: [Image]
+}
+
+type Artist {
+	id: String
+	name: String
+}
+
+type Image {
+	height: Int
+	url: String
+	width: Int
+}
