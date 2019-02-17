@@ -1,0 +1,21 @@
+.Progress {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.Progress-container {
+	width: 100%;
+	flex: 1;
+	height: 0.3em;
+	background: #404040;
+	outline: none;
+	border-radius: 0.3em;
+}
+
+.Progress-fill {
+	height: 0.3em;
+	background-color: #b3b3b3;
+	border-radius: 0.3em;
+}

@@ -1,0 +1,44 @@
+.Player {
+	display: flex;
+	position: fixed;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	color: #d3d3d3;
+	bottom: 0;
+	height: 4em;
+	background-color: #1e272e;
+}
+.Player-info {
+	flex: 2;
+}
+
+.Player-settings {
+	flex: 2;
+	background-color: #1e272e;
+	height: 4em;
+	z-index: 3;
+}
+
+.Player-controls {
+	display: flex;
+	flex: 3;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #1e272e;
+	height: 4em;
+	width: 10em;
+	z-index: 3;
+}
+
+.Player-slider-container {
+	width: 100%; /* Width of the outside container */
+	display: flex;
+}
+
+.Player-slider-label {
+	margin: 0 1em 0 1em;
+	font-size: 0.7em;
+}

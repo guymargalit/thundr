@@ -1,0 +1,71 @@
+{
+	"name": "thundr",
+	"author": "Guy Margalit",
+	"version": "0.1.0",
+	"private": false,
+	"homepage": "./",
+	"main": "public/electron.js",
+	"dependencies": {
+		"apollo-boost": "^0.1.22",
+		"apollo-link-context": "^1.0.12",
+		"electron-is-dev": "^1.0.1",
+		"graphql": "^14.0.2",
+		"moment": "^2.23.0",
+		"node-lifx": "^0.8.0",
+		"node-lifx-lan": "^0.3.1",
+		"react": "^16.6.3",
+		"react-activity": "^1.2.2",
+		"react-apollo": "^2.3.3",
+		"react-dom": "^16.6.3",
+		"react-icons": "^3.2.2",
+		"react-router-dom": "^4.3.1",
+		"react-scripts": "2.1.1",
+		"webmidi": "^2.3.0"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+		"dist": "electron-builder"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not ie <= 11",
+		"not op_mini all"
+	],
+	"devDependencies": {
+		"concurrently": "^4.1.0",
+		"electron": "^3.0.13",
+		"electron-builder": "^20.38.3",
+		"wait-on": "^3.2.0"
+	},
+	"build": {
+		"appId": "com.electron.thundr",
+		"compression": "normal",
+		"productName": "Thundr",
+		"directories": {
+			"buildResources": "build",
+			"output": "dist"
+		},
+		"mac": {
+			"icon": "assets/thundr.icns",
+			"type": "distribution",
+			"target": [
+				"pkg",
+				"dmg",
+				"mas-dev"
+			],
+			"category": "public.app-category.entertainment"
+		},
+		"mas": {
+			"entitlements": "assets/entitlements.mas.plist",
+			"entitlementsInherit": "assets/entitlements.mas.inherit.plist"
+		}
+	}
+}

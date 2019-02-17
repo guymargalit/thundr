@@ -1,0 +1,57 @@
+.Song {
+	display: flex;
+	align-items: center;
+	color: #b6b6b6;
+}
+
+.Song-info {
+	display: flex;
+	flex-direction: column;
+	height: 4em;
+	justify-content: center;
+}
+
+.Song-name {
+	font-size: 0.87em;
+	color: #ffffff;
+	height: 25px;
+	overflow: hidden;
+	line-height: 25px;
+}
+
+.Song-name span {
+	position: absolute;
+	white-space: nowrap;
+}
+
+.Song-artists {
+	display: flex;
+	height: 20px;
+	overflow: hidden;
+	line-height: 20px;
+}
+
+.Song-artist {
+	display: flex;
+	font-size: 0.71em;
+}
+
+.Song-artists span {
+	position: absolute;
+	white-space: nowrap;
+}
+
+.Song-container {
+	background-color: #1e272e;
+	width: 4em;
+	height: 4em;
+	z-index: 3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.Song-album {
+	width: 3em;
+	height: 3em;
+}

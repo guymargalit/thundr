@@ -1,0 +1,44 @@
+.Lights {
+	display: flex;
+	justify-content: center;
+}
+
+.Lights-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #1e272e;
+	width: 40em;
+	height: 6em;
+}
+
+.Light {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 6em;
+	height: 6em;
+}
+
+.Light-icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	width: 3em;
+	height: 3em;
+}
+
+.Light-name {
+	text-align: center;
+	margin: 6em 0 0 0;
+	font-size: 0.8em;
+	color: white;
+}
+
+.Lights-title {
+	margin: 1em 0 0 0;
+	color: white;
+}

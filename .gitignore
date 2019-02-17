@@ -1,6 +1,24 @@
+# server
 server/node_modules
-app/node_modules
-.DS_Store
 server/.env
 server/database/docker-compose.yml
 server/src/generated/prisma.graphql
+
+# app
+app/node_modules
+app/.pnp
+app/.pnp.js
+app/build
+app/dist
+app/assets/entitlements.mas.inherit.plist
+app/assets/entitlements.mas.plist
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

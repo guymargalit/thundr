@@ -1,0 +1,68 @@
+.Keyboard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 3em 0 0 0;
+	height: 119px;
+}
+
+svg {
+	position: absolute;
+	z-index: 0;
+}
+
+.white + .d {
+	fill: #fed330;
+}
+
+.black + .ds {
+	fill: #20bf6b;
+}
+
+.white + .c {
+	fill: #eb3b5a;
+}
+
+.black + .cs {
+	fill: #fa8231;
+}
+
+.white + .e {
+	fill: #26de81;
+}
+
+.white + .f {
+	fill: #0fb9b1;
+}
+
+.black + .fs {
+	fill: #2d98da;
+}
+
+.white + .g {
+	fill: #4b7bec;
+}
+
+.black + .gs {
+	fill: #3867d6;
+}
+
+.white + .a {
+	fill: #8854d0;
+}
+
+.black + .as {
+	fill: #a55eea;
+}
+
+.white + .b {
+	fill: #fc5c65;
+}
+
+.white {
+	fill: #eb3b5a;
+}
+
+.black {
+	fill: #fa8231;
+}
