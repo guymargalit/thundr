@@ -91,14 +91,14 @@ export default class Home extends Component {
 				this.seekTrack(current_track);
 			}
 			// Check if track is playing
-			if (current_track.is_playing !== this.state.current_track.is_playing) {
+			else if (current_track.is_playing !== this.state.current_track.is_playing) {
 				this.seekTrack(current_track);
 				this.setState({
 					current_track: current_track,
 				});
 			}
 			// Check if new track is playing
-			if (current_track.item.id !== this.state.current_track.item.id) {
+			else if (current_track.item.id !== this.state.current_track.item.id) {
 				this.seekTrack(current_track);
 				this.setState({
 					audio_analysis: true,
@@ -107,7 +107,7 @@ export default class Home extends Component {
 				});
 			}
 			// Poll more around 7 seconds
-			if (
+			else if (
 				current_track.progress_ms + 7000 > current_track.item.duration_ms &&
 				this.state.poll_interval === 1500
 			) {
@@ -116,7 +116,7 @@ export default class Home extends Component {
 				});
 			}
 			// Poll even more around 1 second
-			if (
+			else if (
 				current_track.progress_ms + 1000 > current_track.item.duration_ms &&
 				this.state.poll_interval === 1000
 			) {
