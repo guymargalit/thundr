@@ -14,7 +14,9 @@ export default class Lights extends Component {
 							<div key={device.ip} className="Light">
 								<div className="Light-icon" style={{ backgroundColor: '#fff' }}>
 									<MdLightbulbOutline size={30} />
-									<div className="Light-name no-select">{device.deviceInfo.label}</div>
+									<div className="Light-name no-select">
+										{device.deviceInfo ? device.deviceInfo.label : null}
+									</div>
 								</div>
 							</div>
 						))
