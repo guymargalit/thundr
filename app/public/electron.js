@@ -4,7 +4,7 @@ const BrowserWindow = electron.BrowserWindow;
 
 const path = require('path');
 const isDev = require('electron-is-dev');
-const Lifx = require('./lifx');
+const Lifx = require('./lifxlan');
 
 const { ipcMain } = electron;
 
@@ -18,7 +18,7 @@ function createWindow() {
 		width: 801,
 		height: 534,
 	});
-	mainWindow.webContents.session.clearStorageData();
+	//mainWindow.webContents.session.clearStorageData();
 	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 	mainWindow.on('closed', () => (mainWindow = null));
 }
