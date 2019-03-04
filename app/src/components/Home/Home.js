@@ -174,7 +174,6 @@ export default class Home extends Component {
 					}}
 				</Query>
 				<Lights devices={this.state.devices} />
-				<Keyboard devices={this.state.devices} is_playing={this.state.current_track.is_playing} />
 				<Player
 					is_playing={this.state.current_track.is_playing}
 					duration_ms={this.state.current_track.item.duration_ms}
