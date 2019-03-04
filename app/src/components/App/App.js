@@ -10,6 +10,7 @@ class App extends Component {
 		const authToken = localStorage.getItem('AUTH_TOKEN');
 		return (
 			<div className="App">
+				{window.location.pathname.includes('index.html') && <Redirect to="/" />}
 				<Switch>
 					<Route
 						exact
