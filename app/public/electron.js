@@ -8,7 +8,7 @@ const Lifx = require('./lifxlan');
 
 const { ipcMain } = electron;
 
-let mainWindow;
+let mainWindow, loginWindow;
 
 function createWindow() {
 	mainWindow = new BrowserWindow({
@@ -18,13 +18,51 @@ function createWindow() {
 		width: 801,
 		height: 534,
 	});
-	//mainWindow.webContents.session.clearStorageData();
+	// mainWindow.webContents.session.clearStorageData();
 	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-	mainWindow.on('closed', () => (mainWindow = null));
+	mainWindow.on('closed', () => {
+		Lifx.destroy();
+		mainWindow = null;
+	});
 }
+
+ipcMain.on('login', () => {
+	loginWindow = new BrowserWindow({
+		width: 400,
+		height: 800,
+		webPreferences: {
+			nodeIntegration: false,
+		},
+	});
+	loginWindow.loadURL(isDev ? 'http://localhost:4000/login' : 'http://localhost:4000/login');
+
+	const {
+		session: { webRequest },
+	} = loginWindow.webContents;
+
+	const filter = {
+		urls: ['file:///callback*'],
+	};
+
+	webRequest.onBeforeRequest(filter, async ({ url }) => {
+		let result = url.split('=');
+		if (result.length > 1) {
+			mainWindow.webContents.send('token', result[1]);
+		}
+		if (!loginWindow) return;
+		loginWindow.close();
+		loginWindow = null;
+	});
+
+	loginWindow.on('closed', () => (loginWindow = null));
+});
 
 ipcMain.on('lifx-discover', () => {
 	Lifx.discover(mainWindow);
+});
+
+ipcMain.on('lifx-destroy', () => {
+	Lifx.destroy();
 });
 
 ipcMain.on('lifx-color', (event, info) => {
