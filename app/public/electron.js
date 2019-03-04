@@ -1,7 +1,7 @@
+require('dotenv/config');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-
 const path = require('path');
 const isDev = require('electron-is-dev');
 const Lifx = require('./lifxlan');
@@ -15,8 +15,8 @@ function createWindow() {
 		titleBarStyle: 'hidden',
 		minWidth: 600,
 		minHeight: 400,
-		width: 801,
-		height: 534,
+		width: 600,
+		height: 400,
 	});
 	// mainWindow.webContents.session.clearStorageData();
 	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
@@ -34,7 +34,7 @@ ipcMain.on('login', () => {
 			nodeIntegration: false,
 		},
 	});
-	loginWindow.loadURL(isDev ? 'http://localhost:4000/login' : 'http://localhost:4000/login');
+	loginWindow.loadURL(!isDev ? 'http://localhost:4000/login' : process.env.SERVER);
 
 	const {
 		session: { webRequest },
