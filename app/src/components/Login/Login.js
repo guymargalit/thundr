@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../../assets/thundr.svg';
 import './Login.css';
 
 const { ipcRenderer } = window.require('electron');
@@ -19,7 +18,6 @@ export default class Login extends Component {
 	render() {
 		return (
 			<div className="Login">
-				<img src={logo} alt="logo" className="Login-logo no-select" />
 				<div className="Login-title">
 					<h1 className="no-select">Thundr</h1>
 				</div>
