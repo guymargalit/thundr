@@ -112,7 +112,7 @@ server.use(
 		}
 
 		const token = jwt.sign({ userId: user.id }, process.env.SERVER_SECRET);
-		res.redirect('http://localhost:3000/#access_token=' + token);
+		res.redirect('file:///callback/#access_token=' + token);
 	}
 );
 
