@@ -30,6 +30,16 @@ function discover(window) {
 		});
 }
 
+function destroy() {
+	Lifx.destroy()
+		.then(() => {
+			console.log('Bye!');
+		})
+		.catch(error => {
+			console.error();
+		});
+}
+
 function color(info) {
 	if (devices.length > 0) {
 		let device = devices[i];
@@ -113,5 +123,6 @@ function color(info) {
 
 module.exports = {
 	discover,
+	destroy,
 	color,
 };
