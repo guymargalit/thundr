@@ -37,6 +37,7 @@ h1 {
 
 .Login-logo {
 	width: 6em;
+	top: 25%;
 }
 
 .Login-title {
@@ -44,4 +45,18 @@ h1 {
 	flex-direction: row;
 	align-items: center;
 	margin: 0 0 3em 0;
+}
+
+.cls-1 {
+	fill: #fea909;
+}
+
+.cls-2 {
+	fill: #fff;
+}
+
+.cls-3 {
+	stroke: #000;
+	stroke-miterlimit: 10;
+	stroke-width: 28px;
 }
