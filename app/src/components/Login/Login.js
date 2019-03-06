@@ -5,6 +5,7 @@ const { ipcRenderer } = window.require('electron');
 
 export default class Login extends Component {
 	componentDidMount() {
+		this.login();
 		ipcRenderer.on('token', (event, token) => {
 			localStorage.setItem('AUTH_TOKEN', token);
 			this.props.history.push(`/home`);
