@@ -65,7 +65,7 @@ const server = new GraphQLServer({
 					data: {
 						accessToken: accessToken,
 						refreshToken: refreshToken,
-						timeExpires: getTimeExpires(3600),
+						timeExpires: getTimeExpires(3600).toString(),
 					},
 					where: {
 						id: userId,
