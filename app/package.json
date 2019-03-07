@@ -67,6 +67,17 @@
 		"mas": {
 			"entitlements": "assets/entitlements.mas.plist",
 			"entitlementsInherit": "assets/entitlements.mas.inherit.plist"
+		},
+		"win": {
+			"target": [
+				{
+					"target": "nsis",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				}
+			]
 		}
 	}
 }
