@@ -104,7 +104,7 @@ server.use(
 						spotifyId: req.user.id,
 						accessToken: req.user.accessToken,
 						refreshToken: req.user.refreshToken,
-						timeExpires: getTimeExpires(3600),
+						timeExpires: getTimeExpires(3600).toString(),
 					},
 				},
 				`{ id }`
