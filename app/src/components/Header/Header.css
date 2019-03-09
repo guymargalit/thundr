@@ -4,6 +4,8 @@
 	height: 3em;
 	padding: 1.5em 0 0 0;
 	-webkit-app-region: drag;
+	background: #22232c;
+	/* border-bottom: #b697f3 1px solid; */
 }
 
 .Header-keyboard {
