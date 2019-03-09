@@ -35,7 +35,7 @@ export const GET_AUDIO_ANALYSIS = gql`
 `;
 
 export const GET_CURRENT_TRACK = gql`
-	{
+	query getCurrentTrack {
 		getCurrentTrack {
 			progress_ms
 			is_playing
