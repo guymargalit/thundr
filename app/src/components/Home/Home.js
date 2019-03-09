@@ -4,7 +4,6 @@ import Player from '../Player';
 import './Home.css';
 import Header from '../Header';
 import Lights from '../Lights';
-import Keyboard from '../Keyboard';
 
 import { GET_AUDIO_ANALYSIS, GET_CURRENT_TRACK, PLAY, SEEK } from './constants';
 
@@ -103,13 +102,13 @@ export default class Home extends Component {
 				this.setState({
 					audio_analysis: true,
 					current_track: current_track,
-					poll_interval: 1500,
+					poll_interval: 3000,
 				});
 			}
 			// Poll more around 7 seconds
 			if (
 				current_track.progress_ms + 7000 > current_track.item.duration_ms &&
-				this.state.poll_interval === 1500
+				this.state.poll_interval === 3000
 			) {
 				this.setState({
 					poll_interval: 1000,
@@ -148,6 +147,7 @@ export default class Home extends Component {
 					onCompleted={data => this.updateCurrentTrack(data)}
 					pollInterval={this.state.poll_interval}
 					fetchPolicy={'network-only'}
+					notifyOnNetworkStatusChange={true}
 				>
 					{({ loading, error, data }) => {
 						if (loading) return <div />;
@@ -173,7 +173,10 @@ export default class Home extends Component {
 						);
 					}}
 				</Query>
-				<Lights devices={this.state.devices} />
+				<div className="Home-container">
+					<div className="Home-grid">test</div>
+					<Lights devices={this.state.devices} />
+				</div>
 				<Player
 					is_playing={this.state.current_track.is_playing}
 					duration_ms={this.state.current_track.item.duration_ms}
