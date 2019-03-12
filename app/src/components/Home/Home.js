@@ -4,7 +4,7 @@ import Player from '../Player';
 import './Home.css';
 import Header from '../Header';
 import Lights from '../Lights';
-import Keyboard from '../Keyboard';
+// import Keyboard from '../Keyboard';
 
 import { GET_AUDIO_ANALYSIS, GET_CURRENT_TRACK, PLAY, SEEK } from './constants';
 

@@ -4,7 +4,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const isDev = require('electron-is-dev');
-const Lifx = require('./lifx');
+const Lifx = require('./lifxlan');
 
 const { ipcMain } = electron;
 
@@ -18,7 +18,7 @@ function createWindow() {
 		width: 600,
 		height: 400,
 	});
-
+	// mainWindow.webContents.session.clearStorageData();
 	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 	mainWindow.on('closed', () => {
 		Lifx.destroy();
@@ -34,8 +34,8 @@ ipcMain.on('login', () => {
 			nodeIntegration: false,
 		},
 	});
-	loginWindow.loadURL(isDev ? 'http://localhost:4000/login' : process.env.REACT_APP_SERVER + 'login');
-	// loginWindow.webContents.session.clearStorageData();
+	loginWindow.loadURL(isDev ? 'http://localhost:4000/login' : process.env.SERVER);
+
 	const {
 		session: { webRequest },
 	} = loginWindow.webContents;

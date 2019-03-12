@@ -1,4 +1,5 @@
-const Lifx = require('./node-lifx-lan');
+var LifxClient = require('node-lifx').Client;
+var client = new LifxClient();
 
 let devices = [];
 let i = 0;
@@ -6,43 +7,22 @@ let section = 0;
 let effect = 0;
 
 function discover(window) {
-	Lifx.discover()
-		.then(device_list => {
-			if (device_list.length > 0) {
-				return device_list.forEach(device => {
-					devices.push(device);
-					window.webContents.send('lifx-new', device);
-
-					device.turnOn({
-						color: {
-							hue: 0,
-							saturation: 0,
-							brightness: 1.0,
-							kelvin: 3500,
-						},
-						duration: 0.0,
-					});
-				});
-			}
-		})
-		.catch(error => {
-			console.error(error);
-		});
-}
-
-function destroy() {
-	Lifx.destroy()
-		.then(() => {
-			console.log('Bye!');
-		})
-		.catch(error => {
-			console.error();
-		});
+	client.init({
+		resendPacketDelay: 0,
+		resendMaxTimes: 0,
+	});
+	client.on('light-new', device => {
+		devices.push(device);
+		window.webContents.send('lifx-new', device);
+		device.on();
+		device.color(0, 0, 100);
+		console.log(devices);
+	});
 }
 
 function color(info) {
 	if (devices.length > 0) {
-		let device = devices[i];
+		let device = client.light(devices[i].address);
 		if (info.section !== section) {
 			let new_effect = Math.floor(Math.random() * Math.floor(4));
 			section = info.section;
@@ -54,62 +34,25 @@ function color(info) {
 		if (info.color) {
 			switch (effect) {
 				case 0:
-					device.lightSetColor({
-						color: info.color,
-						duration: 0.0,
-					});
+					device.color(info.color.hue * 360, info.color.saturation * 100, info.color.brightness * 100);
 					break;
 				case 1:
 					//FLASH SEQUENTIAL
-					device.lightSetColor({
-						color: {
-							hue: 0.0,
-							saturation: 0.0,
-							brightness: 0.0,
-							kelvin: 3500,
-						},
-						duration: 0.0,
-					});
-					device.lightSetWaveform({
-						transient: 1,
-						color: info.color,
-						period: 100,
-						skew_ratio: 0.5,
-						cycles: 1,
-						waveform: 4,
-					});
+					device.color(info.color.hue * 360, info.color.saturation * 100, info.color.brightness * 100);
 					break;
 				case 2:
 					//ALL LIGHTS
-					for (let j = 0; j < devices.length; j++) {
-						devices[j].lightSetColor({
-							color: info.color,
-							duration: 0.0,
-						});
-					}
+					client.lights().forEach(light => {
+						light.color(info.color.hue * 360, info.color.saturation * 100, info.color.brightness * 100);
+					});
 					break;
 				case 3:
-					device.lightSetColor({
-						color: {
-							hue: 0.0,
-							saturation: 0.0,
-							brightness: 0.0,
-							kelvin: 3500,
-						},
-					});
-					device.lightSetWaveform({
-						transient: 1,
-						color: info.color,
-						period: info.duration,
-						cycles: 1,
-						waveform: 2,
+					client.lights().forEach(light => {
+						light.color(info.color.hue * 360, info.color.saturation * 100, info.color.brightness * 100);
 					});
 					break;
 				default:
-					device.lightSetColor({
-						color: info.color,
-						duration: 0.0,
-					});
+					device.color(info.color.hue * 360, info.color.saturation * 100, info.color.brightness * 100);
 			}
 		}
 
@@ -123,6 +66,5 @@ function color(info) {
 
 module.exports = {
 	discover,
-	destroy,
 	color,
 };
