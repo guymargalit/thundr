@@ -8,7 +8,7 @@
 	color: #d3d3d3;
 	bottom: 0;
 	height: 4em;
-	background-color: #1e272e;
+	background-color: #22232c;
 }
 .Player-info {
 	flex: 2;
@@ -16,7 +16,7 @@
 
 .Player-settings {
 	flex: 2;
-	background-color: #1e272e;
+	background-color: #22232c;
 	height: 4em;
 	z-index: 3;
 }
@@ -27,7 +27,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background-color: #1e272e;
+	background-color: #22232c;
 	height: 4em;
 	width: 10em;
 	z-index: 3;
