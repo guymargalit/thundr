@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MdLightbulbOutline } from 'react-icons/md';
+import { MdLightbulbOutline, MdPowerInput, MdGradient } from 'react-icons/md';
 import { Draggable } from 'react-beautiful-dnd';
 import './Layout.css';
 
@@ -14,6 +14,19 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 export default class Item extends Component {
+	selectIcon = id => {
+		// LIFX Strip 1 & 2 or Beam
+		if (id === 31 || id === 32 || id === 38) {
+			return <MdPowerInput size={26} className="icon" />;
+		}
+		// LIFX Tile
+		else if (id === 55) {
+			return <MdGradient size={26} className="icon" />;
+		} else {
+			return <MdLightbulbOutline size={26} className="icon" />;
+		}
+	};
+
 	render() {
 		return (
 			<Draggable key={this.props.item.ip} draggableId={this.props.item.ip} index={this.props.index}>
@@ -25,7 +38,7 @@ export default class Item extends Component {
 						{...provided.dragHandleProps}
 						style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
 					>
-						<MdLightbulbOutline size={26} className="icon" />
+						{this.selectIcon(this.props.item.deviceInfo.productId)}
 						<div className="Item-info">
 							<div className="Item-title">
 								{this.props.item.deviceInfo ? this.props.item.deviceInfo.label : null}
