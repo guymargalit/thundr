@@ -1,11 +1,29 @@
 .Header {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
-	height: 3em;
-	padding: 1.5em 0 0 0;
+	height: 2.5em;
 	-webkit-app-region: drag;
+	background-color: #22232c;
 }
 
-.Header-keyboard {
-	margin: 1em;
+.Header-login {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 2.5em;
+	-webkit-app-region: drag;
+	background: url('../../assets/bg.png');
+}
+
+.Header-signout {
+	display: flex;
+	align-items: center;
+	margin-right: 1em;
+	color: white;
+}
+
+.Header-signout:hover {
+	color: #fea909;
+	cursor: pointer;
 }
