@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Home from '../Home';
 import Login from '../Login';
+import Header from '../Header';
 import { withApollo, ApolloConsumer } from 'react-apollo';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
@@ -10,8 +11,11 @@ class App extends Component {
 		const authToken = localStorage.getItem('AUTH_TOKEN');
 		return (
 			<div className="App">
-				{window.location.pathname.includes('index.html') && <Redirect to="/" />}
+				<Header />
+				{window.location.pathname.includes('index.html') && <Redirect to="/home" />}
 				<Switch>
+					<Redirect exact from="/" to="/home" />
+					<Route exact path="/login" component={Login} />
 					<Route
 						exact
 						path="/home"
@@ -21,13 +25,12 @@ class App extends Component {
 							) : (
 								<Redirect
 									to={{
-										pathname: '/',
+										pathname: '/login',
 									}}
 								/>
 							)
 						}
 					/>
-					<Route exact path="/" component={Login} />
 				</Switch>
 			</div>
 		);
