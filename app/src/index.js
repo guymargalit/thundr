@@ -10,10 +10,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { setContext } from 'apollo-link-context';
 
 const httpLink = createHttpLink({
-	uri:
-		process.env.NODE_ENV === 'production'
-			? process.env.REACT_APP_SERVER + 'graphql'
-			: 'http://localhost:4000/graphql',
+	uri: process.env.NODE_ENV === 'production' ? 'https://api.thundr.io/graphql' : 'http://localhost:4000/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
