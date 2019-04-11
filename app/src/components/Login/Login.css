@@ -1,20 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,600,700,800,900');
+@font-face {
+	font-family: 'Montserrat';
+	src: url('../../assets/fonts/Montserrat-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
 h1 {
 	font-family: 'Montserrat';
-	font-weight: 600;
-	letter-spacing: -2px;
-	font-size: 2.5em;
-	font-style: normal;
+	letter-spacing: -3px;
+	font-size: 2.3em;
 }
 
 .Login {
-	background: #000000;
+	background: transparent;
+	font-weight: bolder;
 	color: white;
-	height: 100vh;
+	height: calc(100vh - 2.5em);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	background: url('../../assets/bg.png');
+}
+
+.Login-logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-right: 0.5em;
 }
 
 .Login-button {
@@ -27,36 +39,30 @@ h1 {
 	border-radius: 3em;
 	height: 3em;
 	font-size: 0.9em;
-	width: 14em;
+	width: 18em;
+	margin: 3em 0 3em 0;
 }
 
 .Login-button:hover {
-	cursor: pointer;
 	background: #ffc14e;
-}
-
-.Login-logo {
-	width: 6em;
-	top: 25%;
 }
 
 .Login-title {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 0 0 3em 0;
+	margin: 0 0 0 0.5em;
 }
-
-.cls-1 {
-	fill: #fea909;
-}
-
+.cls-1,
 .cls-2 {
-	fill: #fff;
+	fill: #000;
 }
-
-.cls-3 {
+.cls-2 {
 	stroke: #000;
 	stroke-miterlimit: 10;
 	stroke-width: 28px;
+}
+
+.cls-3 {
+	fill: #fff;
 }
