@@ -1,13 +1,15 @@
 {
-	"name": "thundr",
+	"name": "Thundr",
 	"author": "Guy Margalit",
 	"version": "0.1.0",
 	"private": false,
 	"homepage": "./",
+	"description": "Visualize your music with Wi-Fi LED lights",
 	"main": "public/electron.js",
 	"dependencies": {
 		"apollo-boost": "^0.1.22",
 		"apollo-link-context": "^1.0.12",
+		"color-convert": "^2.0.0",
 		"dotenv": "^6.2.0",
 		"electron-is-dev": "^1.0.1",
 		"graphql": "^14.0.2",
@@ -23,6 +25,7 @@
 		"react-icons": "^3.2.2",
 		"react-router-dom": "^4.3.1",
 		"react-scripts": "2.1.1",
+		"react-tooltip": "^3.10.0",
 		"webmidi": "^2.3.0"
 	},
 	"scripts": {
@@ -31,7 +34,7 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-		"dist": "electron-builder"
+		"dist": "electron-builder -mw"
 	},
 	"eslintConfig": {
 		"extends": "react-app"
@@ -69,6 +72,18 @@
 		"mas": {
 			"entitlements": "assets/entitlements.mas.plist",
 			"entitlementsInherit": "assets/entitlements.mas.inherit.plist"
+		},
+		"win": {
+			"icon": "assets/thundr.ico",
+			"target": [
+				{
+					"target": "nsis",
+					"arch": [
+						"x64",
+						"ia32"
+					]
+				}
+			]
 		}
 	}
 }
