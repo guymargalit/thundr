@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import Player from '../Player';
 import './Home.css';
-import Header from '../Header';
-import Lights from '../Lights';
-// import Keyboard from '../Keyboard';
+import Layout from '../Layout';
+import Menu from '../Menu';
+import Keyboard from '../Keyboard';
 
 import { GET_AUDIO_ANALYSIS, GET_CURRENT_TRACK, PLAY, SEEK } from './constants';
 
@@ -30,6 +30,8 @@ export default class Home extends Component {
 			time_ms: 0,
 			poll_interval: 3000,
 			devices: [],
+			refresh: false,
+			keyboard: false,
 		};
 	}
 
@@ -39,6 +41,9 @@ export default class Home extends Component {
 			this.setState({
 				devices: [...this.state.devices, device],
 			});
+		});
+		ipcRenderer.on('lifx-none', () => {
+			this.setState({ refresh: true });
 		});
 	}
 
@@ -134,6 +139,11 @@ export default class Home extends Component {
 		});
 	};
 
+	refreshList = () => {
+		ipcRenderer.send('lifx-discover', '');
+		this.setState({ refresh: false });
+	};
+
 	componentWillUnmount() {
 		clearInterval(this.interval);
 		clearInterval(this.timer);
@@ -142,7 +152,6 @@ export default class Home extends Component {
 	render() {
 		return (
 			<div className="Home">
-				<Header />
 				<Query
 					query={GET_CURRENT_TRACK}
 					onCompleted={data => this.updateCurrentTrack(data)}
@@ -173,7 +182,18 @@ export default class Home extends Component {
 						);
 					}}
 				</Query>
-				<Lights devices={this.state.devices} />
+				<Menu
+					toKeyboard={() => this.setState({ keyboard: true })}
+					toHome={() => this.setState({ keyboard: false })}
+					keyboard={this.state.keyboard}
+				/>
+				<Layout
+					refreshList={() => this.refreshList()}
+					refresh={this.state.refresh}
+					keyboard={this.state.keyboard}
+					devices={this.state.devices}
+				/>
+				{this.state.keyboard ? <Keyboard /> : null}
 				<Player
 					is_playing={this.state.current_track.is_playing}
 					duration_ms={this.state.current_track.item.duration_ms}
