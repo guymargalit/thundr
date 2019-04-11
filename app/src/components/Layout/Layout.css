@@ -1,0 +1,75 @@
+::-webkit-scrollbar-track {
+	display: none;
+}
+
+.Layout {
+	display: flex;
+	flex: 1;
+	background: #292b35;
+	height: calc(100% - 4em);
+}
+
+.Layout-grid {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	flex-direction: column;
+}
+
+.List {
+	display: flex;
+	width: 15em;
+	justify-content: center;
+	align-items: center;
+	background-color: #191a21;
+}
+
+.List-loading {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+
+.List-refresh {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+}
+
+.List-refresh:hover {
+	color: #fea909;
+}
+
+.Item {
+	display: flex;
+	align-items: center;
+	color: white;
+	background-color: #191a21;
+}
+
+.Item-info {
+	display: flex;
+	margin-left: 1em;
+	flex-direction: column;
+}
+
+.Item-title {
+	font-weight: 600;
+	font-size: 0.9em;
+}
+
+.Item-desc {
+	font-size: 0.8em;
+}
+
+.Grid {
+	display: flex;
+	flex: 1;
+	width: 100%;
+	align-items: center;
+	align-content: flex-start;
+	justify-content: center;
+	flex-wrap: wrap;
+}
