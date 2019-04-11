@@ -1,14 +1,23 @@
 .Keyboard {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	align-items: center;
-	margin: 3em 0 0 0;
-	height: 119px;
+	justify-content: center;
 }
 
-svg {
+/* .Keyboard-title {
+	color: white;
+	z-index: 2;
 	position: absolute;
-	z-index: 0;
+	font-weight: 500;
+	user-select: none;
+	padding-bottom: 2em;
+} */
+
+.Keyboard-image {
+	display: flex;
+	margin-bottom: 2em;
 }
 
 .white + .d {
@@ -20,7 +29,7 @@ svg {
 }
 
 .white + .c {
-	fill: #eb3b5a;
+	fill: #eb4d4b;
 }
 
 .black + .cs {
@@ -56,11 +65,11 @@ svg {
 }
 
 .white + .b {
-	fill: #fc5c65;
+	fill: #ff7979;
 }
 
 .white {
-	fill: #eb3b5a;
+	fill: #eb4d4b;
 }
 
 .black {
