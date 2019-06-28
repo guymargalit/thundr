@@ -4,9 +4,9 @@ import Player from '../Player';
 import './Home.css';
 import Layout from '../Layout';
 import Menu from '../Menu';
-import Keyboard from '../Keyboard';
 
 import { GET_AUDIO_ANALYSIS, GET_CURRENT_TRACK, PLAY, SEEK } from './constants';
+import View from '../View/View';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -32,6 +32,7 @@ export default class Home extends Component {
 			devices: [],
 			refresh: false,
 			keyboard: false,
+			view: '',
 		};
 	}
 
@@ -183,17 +184,19 @@ export default class Home extends Component {
 					}}
 				</Query>
 				<Menu
-					toKeyboard={() => this.setState({ keyboard: true })}
-					toHome={() => this.setState({ keyboard: false })}
-					keyboard={this.state.keyboard}
+					toKeyboard={() => this.setState({ view: 'keyboard' })}
+					toHome={() => this.setState({ view: '' })}
+					toSettings={() => this.setState({ view: 'settings' })}
+					view={this.state.view}
 				/>
 				<Layout
 					refreshList={() => this.refreshList()}
 					refresh={this.state.refresh}
-					keyboard={this.state.keyboard}
+					view={this.state.view}
 					devices={this.state.devices}
 				/>
-				{this.state.keyboard ? <Keyboard /> : null}
+				<View view={this.state.view} />
+				{/* {this.state.keyboard ? <Keyboard /> : null} */}
 				<Player
 					is_playing={this.state.current_track.is_playing}
 					duration_ms={this.state.current_track.item.duration_ms}

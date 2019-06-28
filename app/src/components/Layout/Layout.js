@@ -170,7 +170,7 @@ export default class Layout extends Component {
 
 	render() {
 		return (
-			<div style={{ display: this.props.keyboard ? 'none' : '' }} className="Layout">
+			<div style={{ display: this.props.view === '' ? '' : 'none' }} className="Layout">
 				<DragDropContext onDragEnd={this.onDragEnd}>
 					<div className="Layout-grid">
 						<Grid
