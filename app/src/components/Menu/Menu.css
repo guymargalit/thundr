@@ -2,6 +2,7 @@
 	display: flex;
 	width: 12em;
 	user-select: none;
+	border-right: 1px solid #292b35;
 }
 
 .Menu-list {
@@ -22,7 +23,7 @@
 .Menu-item:hover {
 	color: white;
 	margin: 1em 0 0 0;
-	border-left: #fea909 solid 0.25em;
+	border-left: transparent solid 0.25em;
 }
 
 .Menu-item--active {

@@ -4,9 +4,8 @@ import Player from '../Player';
 import './Home.css';
 import Layout from '../Layout';
 import Menu from '../Menu';
-
+import View from '../View';
 import { GET_AUDIO_ANALYSIS, GET_CURRENT_TRACK, PLAY, SEEK } from './constants';
-import View from '../View/View';
 
 const { ipcRenderer } = window.require('electron');
 
@@ -46,6 +45,80 @@ export default class Home extends Component {
 		ipcRenderer.on('lifx-none', () => {
 			this.setState({ refresh: true });
 		});
+
+		let effects = JSON.parse(localStorage.getItem('effects')) || [
+			{
+				id: 0,
+				title: 'All the Single Lights',
+				active: true,
+			},
+			{
+				id: 1,
+				title: 'Everybody (yeah)',
+				active: true,
+			},
+			{
+				id: 2,
+				title: 'Life in the Fade Lane',
+				active: true,
+			},
+			{
+				id: 3,
+				title: 'Come Fade With Me',
+				active: true,
+			},
+			{
+				id: 4,
+				title: 'Gimme! Gimme! Gimme! (All lights after three fades)',
+				active: true,
+			},
+			{
+				id: 5,
+				title: 'Good Cop Bad Cop',
+				active: true,
+			},
+			{
+				id: 6,
+				title: 'Flashing lights lights lights',
+				active: true,
+			},
+			{
+				id: 7,
+				title: 'Hasta la vista, baby',
+				active: true,
+			},
+			{
+				id: 8,
+				title: 'Saturday Night Seizure',
+				active: true,
+			},
+			{
+				id: 9,
+				title: "Let's turn it on",
+				active: true,
+			},
+			{
+				id: 10,
+				title: 'The bend and snap',
+				active: true,
+			},
+			{
+				id: 11,
+				title: "That's the Way (I Light It)",
+				active: true,
+			},
+			{
+				id: 12,
+				title: 'You Strobe Me Round (Like a Record)',
+				active: true,
+			},
+			{
+				id: 13,
+				title: 'Hollywood Strobing',
+				active: true,
+			},
+		];
+		ipcRenderer.send('lifx-effect', effects);
 	}
 
 	clearHandler = current => {
@@ -186,7 +259,7 @@ export default class Home extends Component {
 				<Menu
 					toKeyboard={() => this.setState({ view: 'keyboard' })}
 					toHome={() => this.setState({ view: '' })}
-					toSettings={() => this.setState({ view: 'settings' })}
+					toEffects={() => this.setState({ view: 'effects' })}
 					view={this.state.view}
 				/>
 				<Layout

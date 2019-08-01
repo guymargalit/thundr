@@ -4,7 +4,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require('path');
 const isDev = require('electron-is-dev');
-const Lifx = require('./lifxlan');
+const Lifx = require('./lifx');
 
 const { ipcMain } = electron;
 
@@ -77,6 +77,10 @@ ipcMain.on('lifx-destroy', () => {
 
 ipcMain.on('lifx-effect', (event, info) => {
 	Lifx.effect(info);
+});
+
+ipcMain.on('lifx-settings', (event, info) => {
+	Lifx.setSettings(info);
 });
 
 ipcMain.on('lifx-color', (event, info) => {

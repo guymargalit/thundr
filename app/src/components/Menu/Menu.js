@@ -16,6 +16,16 @@ export default class Menu extends Component {
 						</div>
 						<div className="Menu-title">Home</div>
 					</div>
+
+					<div
+						onClick={this.props.toEffects}
+						className={this.props.view === 'effects' ? 'Menu-item--active' : 'Menu-item'}
+					>
+						<div className="Menu-icon">
+							<MdTune size={25} />
+						</div>
+						<div className="Menu-title">Effects</div>
+					</div>
 					<div
 						onClick={this.props.toKeyboard}
 						className={this.props.view === 'keyboard' ? 'Menu-item--active' : 'Menu-item'}
@@ -24,15 +34,6 @@ export default class Menu extends Component {
 							<MdStraighten size={25} />
 						</div>
 						<div className="Menu-title">Keyboard</div>
-					</div>
-					<div
-						onClick={this.props.toSettings}
-						className={this.props.view === 'settings' ? 'Menu-item--active' : 'Menu-item'}
-					>
-						<div className="Menu-icon">
-							<MdTune size={25} />
-						</div>
-						<div className="Menu-title">Settings</div>
 					</div>
 				</div>
 			</div>

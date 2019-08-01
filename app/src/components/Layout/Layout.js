@@ -179,7 +179,6 @@ export default class Layout extends Component {
 							three={this.state.three}
 							four={this.state.four}
 						/>
-						<Effects />
 					</div>
 					<List
 						refresh={this.props.refresh}

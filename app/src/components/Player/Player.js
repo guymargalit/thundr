@@ -34,7 +34,7 @@ export default class Player extends Component {
 		//Update section index
 		if (this.props.data.sections) {
 			//If current time greater than section start
-			if (time_ms <= this.props.duration_ms && sec <= this.props.data.sections.length - 1) {
+			if (time_ms <= this.props.duration_ms && sec < this.props.data.sections.length - 1) {
 				if (time_ms >= this.props.data.sections[sec].start * 1000 - 100) {
 					sec++;
 				}
@@ -71,6 +71,7 @@ export default class Player extends Component {
 					if (this.props.devices) {
 						h += golden_ratio_conjugate;
 						h %= 1;
+						let time_signature = this.props.data.sections[sec] !== undefined ? this.props.data.sections[sec].time_signature : 4
 						ipcRenderer.send('lifx-color', {
 							section: sec,
 							color: {
@@ -80,6 +81,9 @@ export default class Player extends Component {
 								kelvin: 3500,
 							},
 							duration: Math.floor(this.props.data.beats[beat].duration * 1000),
+							bar: bar,
+							beat: (beat % (time_signature)) + 1,
+							time_signature: time_signature,
 						});
 					}
 					if (Math.floor(this.props.data.beats[beat].duration * 1000) < 400) {

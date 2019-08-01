@@ -1,5 +1,6 @@
 import React from 'react';
 import Keyboard from '../Keyboard';
+import Effects from '../Effects';
 
 const View = ({ view }) => {
 	if (view === '') {
@@ -10,8 +11,8 @@ const View = ({ view }) => {
 		return <Keyboard />;
 	}
 
-	if (view === 'settings') {
-		return null;
+	if (view === 'effects') {
+		return <Effects />;
 	}
 };
 

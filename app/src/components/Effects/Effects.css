@@ -1,34 +1,84 @@
 .Effects {
 	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 0.3em;
-	margin: 0 1em 1em 1em;
-	height: 3em;
+	flex: 1;
+	flex-direction: column;
 	color: white;
 	background-color: #191a21;
 	user-select: none;
 }
-
-.Effects-box {
-	font-size: 1em;
-	margin: 0 1em 0 1em;
-	padding: 0.3em;
-	border-radius: 0.3em;
+.Effects-title {
+	display: flex;
+	font-size: 1.8em;
+	font-weight: 600;
+	padding: 1em 1em 0.5em 2.7em;
 }
 
-.Effects-box:hover {
-	background-color: #292b35;
+.Effects-list {
+	display: flex;
+	flex-direction: column;
+	flex: 3;
+	margin: 1em 0 4em 0;
 }
 
-.Effects-box--active {
-	font-size: 1em;
-	margin: 0 1em 0 1em;
-	padding: 0.3em;
-	border-radius: 0.3em;
-	background-color: #292b35;
+.Effects-settings {
+	display: flex;
+	flex-direction: column;
+	padding: 0 2em 2em 2em;
 }
 
-.Effects-box--active:hover {
-	background-color: #4e5264;
+.Effects-settings-container {
+	display: flex;
+	flex-direction: column;
+	padding: 0 3em;
+	font-size: 0.9em;
+	font-weight: 600;
+}
+
+.Effects-settings-slider {
+	width: 100%;
+	margin: 0.5em 0;
+
+}
+
+.Effects-item {
+	display: flex;
+	align-items: center;
+	border-top: 1px solid #292b35;
+	padding: 0.5em;
+	margin: 0 2em 0 2em;
+}
+
+.Effects-clickable {
+	display: flex;
+	flex: 1;
+	align-items: center;
+}
+
+.Effects-item-favorite {
+	padding-top: 0.25em;
+}
+
+.Effects-item-title {
+	margin-left: 1.5em;
+	font-size: 0.9em;
+	font-weight: 600;
+}
+
+.Effects-item-preview {
+	opacity: 0;
+	display: flex;
+	align-items: center;
+	margin-right: 1em;
+}
+
+.Effects-item:hover {
+	color: #fea909;
+}
+
+.Effects-item-preview:hover {
+	transform: scale(1.25);
+}
+
+.Effects-item:hover .Effects-item-preview {
+	opacity: 100;
 }
