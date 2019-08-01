@@ -121,6 +121,10 @@ export default class Effects extends Component {
 		});
 	};
 
+	onPreviewItem = i => {
+		ipcRenderer.send('lifx-preview', {effect: i});
+	};
+
 	handleChange = e => {
 		let settings = this.state.settings;
 		settings.brightness = e.target.value;
@@ -154,6 +158,7 @@ export default class Effects extends Component {
 							<Item
 								key={effect.id}
 								pressItem={() => this.onUpdateItem(effect.id)}
+								previewItem={() => this.onPreviewItem(effect.id)}
 								title={effect.title}
 								active={effect.active}
 							/>
