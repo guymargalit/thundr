@@ -137,7 +137,7 @@ function preview(info) {
 			info.color = {
 				hue: colors[k] / 360,
 				saturation: 1.0,
-				brightness: 1.0,
+				brightness: settings.brightness,
 				kelvin: 3500,
 			};
 			info.beat = k + 1;
