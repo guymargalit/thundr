@@ -79,6 +79,10 @@ ipcMain.on('lifx-effect', (event, info) => {
 	Lifx.effect(info);
 });
 
+ipcMain.on('lifx-preview', (event, info) => {
+	Lifx.preview(info);
+});
+
 ipcMain.on('lifx-settings', (event, info) => {
 	Lifx.setSettings(info);
 });

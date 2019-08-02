@@ -123,6 +123,35 @@ function setSettings(info) {
 	settings = newSettings;
 }
 
+function preview(info) {
+	let colors = [0,55,120,230];
+	
+	if (lights.length > 0) {
+		let k = 0;
+		let previewTimer = setInterval(() => {
+			let devs = lights[k];
+		if (devs !== undefined) {
+			let devs = lights[k];
+			info.duration = 500;
+			info.time_signature = 4;
+			info.color = {
+				hue: colors[k] / 360,
+				saturation: 1.0,
+				brightness: settings.brightness,
+				kelvin: 3500,
+			};
+			info.beat = k + 1;
+			info.bar = 2;
+			switchEffect(info.effect, devs, info, true)
+		} 
+			k++;
+		}, 500);
+		if(k >= lights.length - 1) {
+			clearInterval(previewTimer);
+		}
+	}
+}
+
 function note(info) {
 	for (let j = 0; j < lights.length; j++) {
 		lights[j].forEach(k => {
@@ -161,7 +190,7 @@ function color(info) {
 					if (eff === null) {
 						eff = effects[0];
 					}
-					eff = switchEffect(eff, devs, info);
+					eff = switchEffect(eff, devs, info, false);
 				}
 			}
 
@@ -176,8 +205,8 @@ function color(info) {
 	}
 }
 
-function switchEffect(eff, devs, info) {
-	if (effects.includes(eff)) {
+function switchEffect(eff, devs, info, preview) {
+	if (effects.includes(eff) || preview === true) {
 		switch (eff) {
 			// all the single lights
 			case 0:
@@ -560,5 +589,6 @@ module.exports = {
 	effect,
 	note,
 	color,
-	setSettings
+	setSettings,
+	preview
 };
