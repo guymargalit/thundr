@@ -466,7 +466,6 @@ function switchEffect(eff, devs, info, preview) {
 							cycles: 0.5,
 							waveform: 1,
 						});
-						devices[k].lightSetWaveform
 					});
 				}
 				else 
