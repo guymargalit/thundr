@@ -47,6 +47,7 @@ async function getCurrentTrack(parent, args, context, info) {
 }
 
 async function seek(parent, args, context, info) {
+	console.log("seek() was called");
 	const userId = getUserId(context);
 	const user = await context.db.query.user({ where: { id: userId } });
 	const token = user.accessToken;
@@ -77,6 +78,7 @@ async function seek(parent, args, context, info) {
 }
 
 async function play(parent, args, context, info) {
+	console.log("play() was called");
 	const userId = getUserId(context);
 	const user = await context.db.query.user({ where: { id: userId } });
 	const token = user.accessToken;
