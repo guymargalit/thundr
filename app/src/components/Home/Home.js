@@ -138,7 +138,7 @@ export default class Home extends Component {
 		this.setState({ time_ms: Date.now() - startTime });
 	};
 
-	seekTrack = current_track => {
+	seekTrack = (current_track, track_change = false) => {
 		this.props.client
 			.query({
 				query: SEEK,
@@ -146,7 +146,8 @@ export default class Home extends Component {
 				fetchPolicy: 'network-only',
 			})
 			.then(() => {
-				if (current_track.is_playing) {
+				console.log(".then hit: is_playing: " + current_track.is_playing);
+				if (current_track.is_playing || track_change) {
 					this.clearHandler();
 					this.props.client
 						.query({
@@ -167,10 +168,12 @@ export default class Home extends Component {
 		if (current_track.item && this.state.current_track.item) {
 			// Check if same track is playing
 			if (this.state.time_ms > current_track.item.duration_ms) {
+				console.log("Track time over hit");
 				this.seekTrack(current_track);
 			}
 			// Check if track is playing
 			if (current_track.is_playing !== this.state.current_track.is_playing) {
+				console.log("Track pause/play change hit");
 				this.seekTrack(current_track);
 				this.setState({
 					current_track: current_track,
@@ -178,7 +181,10 @@ export default class Home extends Component {
 			}
 			// Check if new track is playing
 			if (current_track.item.id !== this.state.current_track.item.id) {
-				this.seekTrack(current_track);
+				console.log("Track change hit");
+				// current_track.is_playing = true;
+				let track_change = true;
+				this.seekTrack(current_track, track_change);
 				this.setState({
 					audio_analysis: true,
 					current_track: current_track,
