@@ -182,27 +182,27 @@ export default class Home extends Component {
 				this.setState({
 					audio_analysis: true,
 					current_track: current_track,
-					poll_interval: 1500,
+					poll_interval: 3000,
 				});
 			}
 			// Poll more around 7 seconds
-			if (
-				current_track.progress_ms + 7000 > current_track.item.duration_ms &&
-				this.state.poll_interval === 1500
-			) {
-				this.setState({
-					poll_interval: 1000,
-				});
-			}
+			// if (
+			// 	current_track.progress_ms + 7000 > current_track.item.duration_ms &&
+			// 	this.state.poll_interval === 1500
+			// ) {
+			// 	this.setState({
+			// 		poll_interval: 1000,
+			// 	});
+			// }
 			// Poll even more around 1 second
-			if (
-				current_track.progress_ms + 1000 > current_track.item.duration_ms &&
-				this.state.poll_interval === 1000
-			) {
-				this.setState({
-					poll_interval: 200,
-				});
-			}
+			// if (
+			// 	current_track.progress_ms + 1000 > current_track.item.duration_ms &&
+			// 	this.state.poll_interval === 1000
+			// ) {
+			// 	this.setState({
+			// 		poll_interval: 200,
+			// 	});
+			// }
 		}
 	};
 
