@@ -27,7 +27,7 @@ export default class Home extends Component {
 			data: null,
 			audio_analysis: false,
 			time_ms: 0,
-			poll_interval: 3000,
+			poll_interval: 2000,
 			devices: [],
 			refresh: false,
 			keyboard: false,
@@ -182,7 +182,7 @@ export default class Home extends Component {
 				this.setState({
 					audio_analysis: true,
 					current_track: current_track,
-					poll_interval: 3000,
+					poll_interval: 2000,
 				});
 			}
 			// Poll more around 7 seconds
