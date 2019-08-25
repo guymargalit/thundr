@@ -10,7 +10,7 @@ let eff = null;
 let settings = {
 	brightness: 1.0,
 	changeBrightness: false,
-}
+};
 
 function discover(window) {
 	devices = [];
@@ -119,34 +119,34 @@ function effect(info) {
 
 function setSettings(info) {
 	let newSettings = info;
-	newSettings.brightness = parseFloat(parseInt(info.brightness)/100);
+	newSettings.brightness = parseFloat(parseInt(info.brightness) / 100);
 	settings = newSettings;
 }
 
 function preview(info) {
-	let colors = [0,55,120,230];
-	
+	let colors = [0, 55, 120, 230];
+
 	if (lights.length > 0) {
 		let k = 0;
 		let previewTimer = setInterval(() => {
 			let devs = lights[k];
-		if (devs !== undefined) {
-			let devs = lights[k];
-			info.duration = 500;
-			info.time_signature = 4;
-			info.color = {
-				hue: colors[k] / 360,
-				saturation: 1.0,
-				brightness: settings.brightness,
-				kelvin: 3500,
-			};
-			info.beat = k + 1;
-			info.bar = 2;
-			switchEffect(info.effect, devs, info, true)
-		} 
+			if (devs !== undefined) {
+				let devs = lights[k];
+				info.duration = 500;
+				info.time_signature = 4;
+				info.color = {
+					hue: colors[k] / 360,
+					saturation: 1.0,
+					brightness: settings.brightness,
+					kelvin: 3500,
+				};
+				info.beat = k + 1;
+				info.bar = 2;
+				switchEffect(info.effect, devs, info, true);
+			}
 			k++;
 		}, 500);
-		if(k >= lights.length - 1) {
+		if (k >= lights.length - 1) {
 			clearInterval(previewTimer);
 		}
 	}
@@ -445,42 +445,51 @@ function switchEffect(eff, devs, info, preview) {
 			case 10:
 				// the bend and snap
 				let ind = i;
-				if (info.beat % 2 === 1)
-				{
-					ind = (info.bar % 2 === 1 ? (ind + 1) : (ind + 2)) % info.time_signature;
-					lights[ind].forEach(k => {
-						devices[k].lightSetColor({
-							color: info.color,
-							duration: 0.0,
+				if (info.beat % 2 === 1) {
+					ind = (info.bar % 2 === 1 ? ind + 1 : ind + 2) % info.time_signature;
+
+					if (ind > lights.length) {
+						ind = 0;
+					}
+					if (lights[ind] !== undefined) {
+						lights[ind].forEach(k => {
+							devices[k].lightSetColor({
+								color: info.color,
+								duration: 0.0,
+							});
+							devices[k].lightSetWaveform({
+								transient: 0,
+								color: {
+									hue: 0.0,
+									saturation: 0.0,
+									brightness: 0.0,
+									kelvin: 3500,
+								},
+								period: info.duration,
+								skew_ratio: 0.5,
+								cycles: 0.5,
+								waveform: 1,
+							});
 						});
-						devices[k].lightSetWaveform({
-							transient: 0,
-							color: {
-								hue: 0.0,
-								saturation: 0.0,
-								brightness: 0.0,
-								kelvin: 3500,
-							},
-							period: info.duration,
-							skew_ratio: 0.5,
-							cycles: 0.5,
-							waveform: 1,
-						});
-					});
-				}
-				else 
-				{
+					}
+				} else {
 					ind = (info.bar % 2 === 1 ? ind : ind + 1) % info.time_signature;
-					lights[ind].forEach(k => {
-						devices[k].lightSetWaveform({
+
+					if (ind > lights.length) {
+						ind = 0;
+					}
+					if (lights[ind] !== undefined) {
+						lights[ind].forEach(k => {
+							devices[k].lightSetWaveform({
 								transient: 0,
 								color: info.color,
 								period: Math.floor(info.duration / info.time_signature),
 								skew_ratio: 0.5,
 								cycles: 1,
 								waveform: 4,
+							});
 						});
-					});
+					}
 				}
 
 				break;
@@ -589,5 +598,5 @@ module.exports = {
 	note,
 	color,
 	setSettings,
-	preview
+	preview,
 };
