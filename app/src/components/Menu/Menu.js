@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { MdHome, MdStraighten, MdSettings, MdTune } from 'react-icons/md';
-import patreon from '../../assets/patreon.png';
+import { MdHome, MdStraighten, MdTune, MdAccessibility } from 'react-icons/md';
 import './Menu.css';
-
-const { shell } = window.require('electron');
 
 export default class Menu extends Component {
 	render() {
@@ -39,12 +36,15 @@ export default class Menu extends Component {
 							</div>
 							<div className="Menu-title">Keyboard</div>
 						</div>
-					</div>
-					<div
-						onClick={() => shell.openExternal('https://www.patreon.com/bePatron?u=16401129')}
-						className="Menu-item-bottom"
-					>
-						<img src={patreon} width={150} alt="patreon" />
+						<div
+							onClick={this.props.toExperimental}
+							className={this.props.view === 'experimental' ? 'Menu-item--active' : 'Menu-item'}
+						>
+							<div className="Menu-icon">
+								<MdAccessibility size={25} />
+							</div>
+							<div className="Menu-title">Support</div>
+						</div>
 					</div>
 				</div>
 			</div>

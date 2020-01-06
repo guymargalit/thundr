@@ -260,6 +260,7 @@ export default class Home extends Component {
 					toKeyboard={() => this.setState({ view: 'keyboard' })}
 					toHome={() => this.setState({ view: '' })}
 					toEffects={() => this.setState({ view: 'effects' })}
+					toExperimental={() => this.setState({ view: 'experimental' })}
 					view={this.state.view}
 				/>
 				<Layout

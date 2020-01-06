@@ -1,0 +1,31 @@
+.Experimental {
+  display: flex;
+	flex: 1;
+	flex-direction: column;
+	color: white;
+	background-color: #191a21;
+	user-select: none;
+}
+
+.Experimental-title {
+display: flex;
+font-size: 1.8em;
+font-weight: 600;
+padding: 1em 1em 0.5em 1.5em;
+}
+
+.Info {
+  display: inline;
+	padding: 0 3em;
+	font-size: 0.9em;
+  font-weight: 600;
+  margin: 0.5em 0 0 0;
+}
+
+.Patreon-button {
+  margin: 1em 3em;
+}
+
+.Spotify-info {
+  margin: 1em 3em;
+}

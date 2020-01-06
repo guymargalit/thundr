@@ -132,7 +132,6 @@ export default class Keyboard extends Component {
 	render() {
 		return (
 			<div style={{ background: this.state.background }} className="Keyboard">
-				{/* {this.state.keyboard ? null : <div className="Keyboard-title">Connect MIDI</div>} */}
 				<div className="Keyboard-image">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +141,6 @@ export default class Keyboard extends Component {
 						height="143"
 						id="piano"
 					>
-						{/* <g filter={this.state.keyboard ? '' : 'url(#grayscale)'}> */}
 						<g>
 							<rect rx="1" className="white c" data-note="c4" width="18" height="60" x="0" y="0" />
 							<rect className="white d" data-note="d4" width="15" height="60" x="15" y="0" />
