@@ -153,11 +153,57 @@ function preview(info) {
 }
 
 function note(info) {
+	if(info.length === 1) {
+		//if length 1 change all the lights
+	for (let j = 0; j < lights.length; j++) {
+			lights[j].forEach(k => {
+				devices[k].lightSetColor({
+					color: {
+						hue: info[0].color / 360,
+						saturation: 1.0,
+						brightness: 1.0,
+						kelvin: 3500,
+					},
+					duration: 0.0,
+				});
+			});
+	}
+}
+else if(info.length === 2) {
+	//if length 2 change half the lights
+for (let j = 0; j < 2; j++) {
+		lights[j].forEach(k => {
+			devices[k].lightSetColor({
+				color: {
+					hue: info[0].color / 360,
+					saturation: 1.0,
+					brightness: 1.0,
+					kelvin: 3500,
+				},
+				duration: 0.0,
+			});
+		});
+}
+for (let j = 2; j < lights.length; j++) {
+	lights[j].forEach(k => {
+		devices[k].lightSetColor({
+			color: {
+				hue: info[1].color / 360,
+				saturation: 1.0,
+				brightness: 1.0,
+				kelvin: 3500,
+			},
+			duration: 0.0,
+		});
+	});
+}
+}
+else {
 	for (let j = 0; j < lights.length; j++) {
 		lights[j].forEach(k => {
 			devices[k].lightSetColor({
 				color: {
-					hue: info / 360,
+					hue: info[j%info.length].color / 360,
 					saturation: 1.0,
 					brightness: 1.0,
 					kelvin: 3500,
@@ -166,6 +212,8 @@ function note(info) {
 			});
 		});
 	}
+}
+
 }
 
 function color(info) {

@@ -19,11 +19,13 @@ export default class Keyboard extends Component {
 	componentDidMount() {
 		this._isMounted = true;
 		this.connectMIDI();
+		this.interval = setInterval(() => this.setState({ notes: [] }), 1000);
 	}
 
 	componentWillUnmount() {
 		this._isMounted = false;
 		this.setState({ keyboard: false });
+		clearInterval(this.interval);
 		WebMidi.disable();
 	}
 
@@ -35,8 +37,8 @@ export default class Keyboard extends Component {
 					this.setState({ keyboard: true });
 					controller.addListener('controlchange', 'all', e => {});
 					controller.addListener('noteon', 'all', e => {
-						this.addNote(e.note.name);
-						this.setBackground(e.note.name);
+						let color = this.setBackground(e.note.name);
+						this.addNote({name: e.note.name, color: color});
 					});
 					controller.addListener('noteoff', 'all', e => {
 						this.removeNote(e.note.name);
@@ -102,19 +104,21 @@ export default class Keyboard extends Component {
 				break;
 		}
 		if (this._isMounted) {
-			ipcRenderer.send('lifx-note', color);
+			// ipcRenderer.send('lifx-note', color);
 			this.setState({ background: background });
 		}
+		return color;
 	};
 
 	addNote = note => {
 		let notes = this.state.notes;
-		let index = notes.indexOf(note);
+		let index = notes.map((note)=>note.name).indexOf(note.name);
 		if (index === -1) {
 			notes.push(note);
 		}
 		if (this._isMounted) {
 			this.setState(notes);
+			ipcRenderer.send('lifx-note', notes);
 		}
 	};
 
