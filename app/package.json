@@ -9,6 +9,7 @@
 	"dependencies": {
 		"apollo-boost": "^0.1.22",
 		"apollo-link-context": "^1.0.12",
+		"chroma-js": "^2.1.0",
 		"color-convert": "^2.0.0",
 		"dotenv": "^6.2.0",
 		"electron-is-dev": "^1.0.1",
@@ -27,6 +28,7 @@
 		"react-input-range": "^1.3.0",
 		"react-router-dom": "^4.3.1",
 		"react-scripts": "2.1.1",
+		"react-select": "^3.0.8",
 		"react-tooltip": "^3.10.0",
 		"webmidi": "^2.3.0"
 	},

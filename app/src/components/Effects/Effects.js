@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
-import InputRange from 'react-input-range';
 import Item from './Item';
 import './Effects.css';
-
+import Select from 'react-select';
+import chroma from 'chroma-js';
 const { ipcRenderer } = window.require('electron');
 
 export default class Effects extends Component {
@@ -122,34 +122,102 @@ export default class Effects extends Component {
 	};
 
 	onPreviewItem = i => {
-		ipcRenderer.send('lifx-preview', {effect: i});
+		ipcRenderer.send('lifx-preview', { effect: i });
 	};
 
 	handleChange = e => {
 		let settings = this.state.settings;
 		settings.brightness = e.target.value;
-		this.setState({ settings: settings});
-		localStorage.setItem('settings', JSON.stringify(settings))
+		this.setState({ settings: settings });
+		localStorage.setItem('settings', JSON.stringify(settings));
 		ipcRenderer.send('lifx-settings', settings);
 	};
 
 	render() {
+		const colourOptions = [
+			{ value: 'blue', label: 'Blue', color: '#0052CC' },
+			{ value: 'purple', label: 'Purple', color: '#5243AA' },
+			{ value: 'red', label: 'Red', color: '#FF3630' },
+			{ value: 'orange', label: 'Orange', color: '#FF8B00' },
+			{ value: 'yellow', label: 'Yellow', color: '#FFC400' },
+			{ value: 'green', label: 'Green', color: '#36B37E' },
+		];
+
+		const colourStyles = {
+			control: styles => ({ ...styles, backgroundColor: 'white' }),
+			option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+				const color = chroma(data.color);
+				return {
+					...styles,
+					backgroundColor: isDisabled
+						? null
+						: isSelected
+						? data.color
+						: isFocused
+						? color.alpha(0.1).css()
+						: null,
+					color: isDisabled
+						? '#ccc'
+						: isSelected
+						? chroma.contrast(color, 'white') > 2
+							? 'white'
+							: 'black'
+						: data.color,
+					cursor: isDisabled ? 'not-allowed' : 'default',
+
+					':active': {
+						...styles[':active'],
+						backgroundColor: !isDisabled && (isSelected ? data.color : color.alpha(0.3).css()),
+					},
+				};
+			},
+			multiValue: (styles, { data }) => {
+				const color = chroma(data.color);
+				return {
+					...styles,
+					backgroundColor: color.alpha(0.1).css(),
+				};
+			},
+			multiValueLabel: (styles, { data }) => ({
+				...styles,
+				color: data.color,
+			}),
+			multiValueRemove: (styles, { data }) => ({
+				...styles,
+				color: data.color,
+				':hover': {
+					backgroundColor: data.color,
+					color: 'white',
+				},
+			}),
+		};
+
 		return (
 			<div className="Effects">
 				<div className="Effects-title">Effects</div>
 				<div className="Effects-settings">
-					<div className="Effects-settings-container">Max Brightness: {this.state.settings.brightness}
-					<input
-						id="typeinp"
-						type="range"
-						name="brightness"
-						className="Effects-settings-slider"
-						min={0}
-						max={100}
-						value={this.state.settings.brightness}
-						onChange={this.handleChange}
-						step={1}
-					/>
+					<div className="Effects-settings-container">
+						Max Brightness: {this.state.settings.brightness}
+						<input
+							id="typeinp"
+							type="range"
+							name="brightness"
+							className="Effects-settings-slider"
+							min={0}
+							max={100}
+							value={this.state.settings.brightness}
+							onChange={this.handleChange}
+							step={1}
+						/>
+					</div>
+					<div className="Effects-settings-container">
+						<Select
+							closeMenuOnSelect={false}
+							defaultValue={colourOptions}
+							isMulti
+							options={colourOptions}
+							styles={colourStyles}
+						/>
 					</div>
 				</div>
 				<div className="Effects-list">
