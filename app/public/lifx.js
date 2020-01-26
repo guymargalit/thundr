@@ -18,8 +18,11 @@ function discover(window) {
 		.then(device_list => {
 			if (device_list.length > 0) {
 				return device_list.forEach(device => {
-					devices.push(device);
-					window.webContents.send('lifx-new', device);
+					let index = devices.findIndex(x => x.ip===device.ip)
+					if(index === -1) {
+						devices.push(device);
+						window.webContents.send('lifx-new', device);
+					}
 				});
 			} else {
 				window.webContents.send('lifx-none', '');

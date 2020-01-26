@@ -215,7 +215,7 @@ export default class Home extends Component {
 
 	refreshList = () => {
 		ipcRenderer.send('lifx-discover', '');
-		this.setState({ refresh: false });
+		this.setState({ devices: [], refresh: false });
 	};
 
 	componentWillUnmount() {

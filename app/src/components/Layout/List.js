@@ -33,18 +33,23 @@ export default class List extends Component {
 	render() {
 		return (
 			<div className="List">
-				{this.state.key.devices.length > 0 ? (
-					<Droppable droppableId="dropAll">
-						{(provided, snapshot) => (
-							<div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
-								{this.props.all.map((item, index) => (
-									<Item key={item.ip} item={item} index={index} />
-								))}
-								<div style={{ width: '10em' }}> </div>
-								{provided.placeholder}
-							</div>
-						)}
-					</Droppable>
+				{this.state.key.devices.length > 0 && !this.props.refresh ? (
+					<>
+						<div className="List-refresh no-select">
+							<MdRefresh onClick={this.props.refreshList} size={26} />
+						</div>
+						<Droppable droppableId="dropAll">
+							{(provided, snapshot) => (
+								<div ref={provided.innerRef} style={getListStyle(snapshot.isDraggingOver)}>
+									{this.props.all.map((item, index) => (
+										<Item key={item.ip} item={item} index={index} />
+									))}
+									<div style={{ width: '10em' }}> </div>
+									{provided.placeholder}
+								</div>
+							)}
+						</Droppable>
+					</>
 				) : this.props.refresh ? (
 					<div className="List-refresh no-select">
 						<MdRefresh onClick={this.props.refreshList} size={26} />

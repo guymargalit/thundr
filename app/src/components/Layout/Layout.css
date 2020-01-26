@@ -19,6 +19,8 @@
 .List {
 	display: flex;
 	width: 15em;
+	padding-top: 1em;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	background-color: #191a21;
